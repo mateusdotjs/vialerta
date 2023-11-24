@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Button from "../components/Button";
-import Card from "../components/card";
+import Card from "../components/Card";
 import { useContext, useEffect, useState } from "react";
 import { userContext } from "../contexts/AuthContext";
 import CardSkeleton from "../components/CardSkeleton";
