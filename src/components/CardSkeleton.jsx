@@ -1,7 +1,7 @@
 const CardSkeleton = () => {
   return (
     <div
-      className="relative animate-pulse rounded-md border-[1px] border-gray-200 py-4 pl-7 pr-4
+      className="relative w-full animate-pulse rounded-md border-[1px] border-gray-200 py-4 pl-7 pr-4
      shadow-sm transition-all hover:shadow-lg md:w-96"
     >
       <div className="absolute -left-4 flex h-8 w-8 rounded-sm bg-gray-300 shadow-md"></div>
