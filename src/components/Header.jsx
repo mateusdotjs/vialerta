@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "../assets/vialerta.svg?react";
+import Menu from "../assets/menu.svg?react";
 import { useState } from "react";
 
 const Header = ({ children, links }) => {
@@ -12,7 +13,7 @@ const Header = ({ children, links }) => {
           <Logo />
         </Link>
         <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-          MENU
+          <Menu />
         </button>
         <nav
           className={`right-5 top-20 z-50 rounded-md bg-neutral-900 p-5 md:static md:block md:bg-transparent md:p-0
