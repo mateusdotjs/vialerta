@@ -39,7 +39,7 @@ const Home = () => {
           </Button>,
         ]}
       </Header>
-      <div className="mx-auto flex w-full flex-1 flex-wrap content-start items-start justify-center gap-7 py-6 pl-5 pr-3 md:justify-start lg:px-5 xl:max-w-7xl">
+      <div className="justify-center flex flex-1 flex-wrap gap-7 py-6 pl-5 pr-3 md:mx-auto lg:justify-start lg:px-5 xl:max-w-7xl">
         {linhas
           ? linhas.map((linha) => {
               return (

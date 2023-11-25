@@ -9,6 +9,8 @@ const Error = ({ error }) => {
     case "Invalid login credentials":
       error = "Email ou senha incorretos";
       break;
+    default:
+      break;
   }
 
   return <p className="mt-1 font-semibold text-red-600">{error}</p>;

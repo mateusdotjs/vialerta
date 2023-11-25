@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const userContext = createContext();
 
 export const AuthContext = ({ children }) => {
+  const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(undefined);
   const [error, setError] = useState(null);
@@ -22,6 +23,7 @@ export const AuthContext = ({ children }) => {
       setLoading(false);
       return;
     }
+    setUser({ id: data.user.id, name: data.user.user_metadata.name });
     setLoggedIn(true);
     setLoading(false);
     return navigate("/home");
@@ -68,6 +70,7 @@ export const AuthContext = ({ children }) => {
         data: { user },
       } = await supabase.auth.getUser();
       if (user) {
+        setUser({ id: user.id, name: user.user_metadata.name });
         setLoggedIn(true);
       }
       setLoading(false);
@@ -79,6 +82,7 @@ export const AuthContext = ({ children }) => {
   return (
     <userContext.Provider
       value={{
+        user,
         login,
         loggedIn,
         logout,
