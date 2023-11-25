@@ -3,9 +3,9 @@ import colors from "../../themes";
 
 const Card = ({ id, title, status }) => {
   return (
-    <Link to={`/status/${id}`}>
+    <Link className="w-full md:w-auto" to={`/status/${id}`}>
       <div
-        className="group relative w-full cursor-pointer rounded-md border-[1px] border-gray-200 py-4 pl-7 pr-4
+        className="group relative cursor-pointer rounded-md border-[1px] border-gray-200 py-4 pl-7 pr-4
      shadow-sm transition-all hover:shadow-lg md:w-96"
       >
         <div
