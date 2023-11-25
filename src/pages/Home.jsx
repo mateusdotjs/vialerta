@@ -5,8 +5,15 @@ import { useContext, useEffect, useState } from "react";
 import { userContext } from "../contexts/AuthContext";
 import CardSkeleton from "../components/CardSkeleton";
 
+const links = [
+  {
+    title: "Conta",
+    url: "/conta",
+  },
+];
+
 const Home = () => {
-  const { logout, loading, loggedIn } = useContext(userContext);
+  const { logout } = useContext(userContext);
   const [linhas, setLinhas] = useState(null);
 
   useEffect(() => {
@@ -25,7 +32,7 @@ const Home = () => {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header>
+      <Header links={links}>
         {[
           <Button key={1} onClick={logout}>
             Sair
