@@ -45,7 +45,7 @@ export const AuthContext = ({ children }) => {
   async function createUser(name, email, password) {
     setError(null);
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -59,6 +59,8 @@ export const AuthContext = ({ children }) => {
       setLoading(false);
       return;
     }
+
+    setUser({ id: data.user.id, name: data.user.user_metadata.name });
     setLoggedIn(true);
     setLoading(false);
     return navigate("/home");
