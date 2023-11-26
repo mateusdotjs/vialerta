@@ -9,7 +9,7 @@ const Header = ({ children, links }) => {
   return (
     <header className="border border-gray-100 shadow-sm shadow-gray-100">
       <div className="relative mx-auto flex w-full items-center justify-between px-3 py-6 xl:max-w-7xl">
-        <Link to={"/"}>
+        <Link to={"/home"}>
           <Logo />
         </Link>
         <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
