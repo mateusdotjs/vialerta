@@ -17,7 +17,7 @@ const StatusData = ({ id, title, status }) => {
     setLoading(true);
     const { error } = await supabase
       .from("ocorrencias")
-      .insert({ user: user.id, type });
+      .insert({ user: user.id, type, linha: id });
     if (error) setError(error.message);
     else setError(false);
     setLoading(false);
@@ -61,7 +61,7 @@ const StatusData = ({ id, title, status }) => {
       </Button>
       {error && <Error error={error} />}
       {error === false && (
-        <p className="mt-1 font-semibold text-green-500">Ocorrência enviada.</p>
+        <p className="mt-1 font-semibold text-green-600">Ocorrência enviada.</p>
       )}
     </>
   );

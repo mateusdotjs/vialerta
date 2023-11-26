@@ -1,7 +1,30 @@
 import { Link } from "react-router-dom";
 import colors from "../../themes";
+import { useEffect, useState } from "react";
+import { supabase } from "../../supabase";
 
 const Card = ({ id, title, status }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const date = new Date();
+    date.setMinutes(date.getMinutes() - 30);
+
+    async function getOcorrencias() {
+      const { count, error } = await supabase
+        .from("ocorrencias")
+        .select("*", { count: "exact", head: true })
+        .eq("linha", id)
+        .gt("created_at", date.toISOString());
+
+      console.log(error, count);
+      if (error) return null;
+      setCount(count);
+    }
+
+    getOcorrencias();
+  }, [id]);
+
   return (
     <Link className="w-full md:w-auto" to={`/status/${id}`}>
       <div
@@ -21,7 +44,15 @@ const Card = ({ id, title, status }) => {
         <span className="mb-5 block font-normal text-gray-400">
           Status segundo Metrô/CPTM
         </span>
-        <span className="block font-normal text-red-500"></span>
+        {count > 0 ? (
+          <span className="block font-normal text-red-500">
+            Foram reportadas {count} ocorrências nos últimos 30 minutos
+          </span>
+        ) : (
+          <span className="block font-normal text-green-600">
+            Não houve nenhuma ocorrência nos últimos 30 minutos
+          </span>
+        )}
       </div>
     </Link>
   );
