@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { supabase } from "../../supabase";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const userContext = createContext();
 
@@ -10,6 +10,7 @@ export const AuthContext = ({ children }) => {
   const [loading, setLoading] = useState(undefined);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  let location = useLocation();
 
   async function login(email, password) {
     setError(null);
@@ -80,6 +81,10 @@ export const AuthContext = ({ children }) => {
     setLoading(true);
     checkLogin();
   }, []);
+
+  useEffect(() => {
+    setError(null);
+  }, [location]);
 
   return (
     <userContext.Provider
