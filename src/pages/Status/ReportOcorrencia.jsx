@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import Button from "./Button";
-import Error from "./Error";
-import colors from "../../themes";
-import { userContext } from "../contexts/AuthContext";
-import { postOcorrencia } from "../../functions";
-import Select from "./Select";
+import Button from "../../components/Button";
+import Error from "../../components/Error";
+import Select from "../../components/Select";
+import { userContext } from "../../contexts/AuthContext";
+import { postOcorrencia } from "../../../functions";
+import { useParams } from "react-router-dom";
 
 const options = [
   {
@@ -22,11 +22,12 @@ const options = [
   },
 ];
 
-const ReportOcorrencia = ({ id, title, status }) => {
+const ReportOcorrencia = () => {
   const { user } = useContext(userContext);
   const [type, setType] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { id } = useParams();
 
   async function handleClick() {
     if (type == null) return;
@@ -39,22 +40,13 @@ const ReportOcorrencia = ({ id, title, status }) => {
   }
 
   return (
-    <div>
-      <h1 className="text-xl font-semibold text-gray-950 md:text-2xl">
-        Linha {id} - {title}
-      </h1>
-      <div
-        style={{ backgroundColor: colors[id] }}
-        className="mb-3 h-1 w-4/6 rounded-sm md:w-3/6"
-      ></div>
-      <span className="block text-lg font-medium text-gray-950 md:text-xl">
-        Situação: {status}
-      </span>
-      <span className="mb-10 block text-lg font-medium text-gray-400 md:text-xl">
-        Status segundo o Metrô/CPTM
-      </span>
-      <Select options={options} label={"Reportar um problema:"} setType={setType}/>
-      <Button onClick={handleClick} disabled={loading}>
+    <div className="animate-slide">
+      <Select
+        options={options}
+        label={"Reportar uma ocorrência:"}
+        setType={setType}
+      />
+      <Button onClick={handleClick} disabled={loading} css={["w-full"]}>
         {loading ? "Carregando..." : "Relatar ocorrência"}
       </Button>
       {error && <Error error={error} />}
