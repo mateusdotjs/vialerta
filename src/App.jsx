@@ -6,7 +6,9 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import { AuthContext } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Status from "./pages/Status";
+import Status from "./pages/Status/Status";
+import TotalOcorrencias from "./pages/Status/TotalOcorrencias";
+import ReportOcorrencia from "./pages/Status/ReportOcorrencia";
 
 function App() {
   return (
@@ -33,7 +35,10 @@ function App() {
                 <Status />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route index element={<ReportOcorrencia />} />
+            <Route path="stats" element={<TotalOcorrencias />} />
+          </Route>
         </Routes>
       </AuthContext>
     </BrowserRouter>

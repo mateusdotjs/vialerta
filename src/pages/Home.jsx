@@ -4,6 +4,8 @@ import Card from "../components/Card";
 import { useContext, useEffect, useState } from "react";
 import { userContext } from "../contexts/AuthContext";
 import CardSkeleton from "../components/CardSkeleton";
+import { getRowOcorrencias } from "../../functions";
+import { linhas } from "../../themes";
 
 const links = [
   {
@@ -14,14 +16,43 @@ const links = [
 
 const Home = () => {
   const { logout } = useContext(userContext);
-  const [linhas, setLinhas] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState(null);
+  const [ocorrencias, setOcorrencias] = useState(null);
 
   useEffect(() => {
-    fetch("https://api-metro-sp.onrender.com")
-      .then((res) => res.json())
-      .then((data) => {
-        setLinhas(data);
-      });
+    async function getStatus() {
+      try {
+        const res = await fetch("https://api-metro-sp.onrender.com");
+        const json = await res.json();
+        return json;
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
+
+    async function getOcorrencias() {
+      const { data, error } = await getRowOcorrencias(null, null, "lastHour");
+      if (error) return Promise.reject(error);
+  
+      return data;
+    }
+
+    Promise.allSettled([getStatus(), getOcorrencias()])
+      .then((result) => {
+        if (result[0].status === "fulfilled") {
+          setStatus(result[0].value);
+        } else {
+          setStatus(null);
+        }
+
+        if (result[1].status === "fulfilled") {
+          setOcorrencias(result[1].value);
+        } else {
+          setOcorrencias(null);
+        }
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   let skeletons = [];
@@ -39,19 +70,23 @@ const Home = () => {
           </Button>,
         ]}
       </Header>
-      <div className="flex flex-1 flex-wrap justify-center gap-7 py-6 pl-5 pr-3 md:mx-auto lg:content-start lg:justify-start lg:px-5 xl:max-w-7xl">
-        {linhas
-          ? linhas.map((linha) => {
-              return (
-                <Card
-                  key={linha.id}
-                  id={linha.id}
-                  title={linha.titulo}
-                  status={linha.status}
-                />
-              );
-            })
-          : skeletons.map((skeleton) => skeleton)}
+      <div
+        className="flex flex-1 flex-wrap justify-center gap-7 py-6 pl-5 pr-3 md:mx-auto 
+      lg:content-start lg:justify-start lg:px-5 xl:max-w-7xl"
+      >
+        {loading && skeletons.map((skeleton) => skeleton)}
+        {!loading &&
+          linhas.map((linha) => {
+            return (
+              <Card
+                key={linha.id}
+                id={linha.id}
+                title={linha.titulo}
+                status={status}
+                ocorrencias={ocorrencias}
+              />
+            );
+          })}
       </div>
     </div>
   );

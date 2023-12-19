@@ -1,8 +1,21 @@
 import { Link } from "react-router-dom";
-import colors from "../../themes";
-import Ocorrencia from "./Ocorrencia";
+import { colors } from "../../themes";
 
-const Card = ({ id, title, status }) => {
+const Card = ({ id, title, status, ocorrencias }) => {
+  const statusLinha = status
+    ? status.map((linha) => {
+        if (linha.id == id) {
+          return linha.status;
+        }
+      })
+    : "Status indisponível";
+
+  const numOcorrencias = ocorrencias
+    ? ocorrencias.filter((ocorrencia) => {
+        return ocorrencia.linha == id;
+      })
+    : null;
+
   return (
     <Link className="w-full md:w-auto" to={`/status/${id}`}>
       <div
@@ -17,12 +30,22 @@ const Card = ({ id, title, status }) => {
           {id}
         </div>
         <span className="block font-semibold text-gray-950">
-          {title} - {status}
+          {title} - {statusLinha}
         </span>
         <span className="mb-5 block font-normal text-gray-400">
           Status segundo Metrô/CPTM
         </span>
-        <Ocorrencia id={id} time={"lastHour"} />
+        {numOcorrencias ? (
+          <span>
+            {numOcorrencias.length}{" "}
+            {numOcorrencias.length === 1
+              ? "ocorrência relatada"
+              : "ocorrências relatadas"}{" "}
+            na última hora
+          </span>
+        ) : (
+          "Número de ocorrências indisponível"
+        )}
       </div>
     </Link>
   );
