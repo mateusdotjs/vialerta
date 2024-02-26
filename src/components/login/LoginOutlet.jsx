@@ -1,4 +1,4 @@
-import Logo from "../assets/vialerta.svg?react";
+import Logo from "../../assets/vialerta.svg?react";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 

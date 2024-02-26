@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { colors } from "../../themes";
+import { colors } from "../../../themes";
 
 const Card = ({ id, title, status, ocorrencias }) => {
   const statusLinha = status

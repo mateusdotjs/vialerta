@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Logo from "../assets/vialerta.svg?react";
-import Menu from "../assets/menu.svg?react";
+import Logo from "../../assets/vialerta.svg?react";
+import Menu from "../../assets/menu.svg?react";
 import { useState } from "react";
 
 const Header = ({ children, links }) => {

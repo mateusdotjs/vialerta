@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink, Outlet, useParams } from "react-router-dom";
-import Header from "../../components/Header";
-import Button from "../../components/Button";
+import Header from "../global/Header";
+import Button from "../global/Button";
 import { userContext } from "../../contexts/AuthContext";
 import StatusSkeleton from "./StatusSkeleton";
 import { linhas, colors } from "../../../themes";

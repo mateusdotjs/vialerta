@@ -1,10 +1,10 @@
-import Input from "../components/Input";
-import Button from "../components/Button";
+import Input from "../global/Input";
+import Button from "../global/Button";
 import { Link, Navigate } from "react-router-dom";
-import useField from "../hooks/useField";
+import useField from "../../hooks/useField";
 import { useContext } from "react";
-import { userContext } from "../contexts/AuthContext";
-import Error from "../components/Error";
+import { userContext } from "../../contexts/AuthContext";
+import Error from "../global/Error";
 
 const LoginCreate = () => {
   const { loading, login, error, setError, loggedIn } = useContext(userContext);

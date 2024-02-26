@@ -1,14 +1,14 @@
-import LoginOutlet from "./pages/LoginOutlet";
-import Main from "./pages/Main";
-import Register from "./pages/Register";
+import LoginOutlet from "./components/login/LoginOutlet";
+import Main from "./components/landingPage/LandingPage";
+import Register from "./components/login/Register";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
+import Login from "./components/login/Login";
+import Home from "./components/home/Home";
 import { AuthContext } from "./contexts/AuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Status from "./pages/Status/Status";
-import TotalOcorrencias from "./pages/Status/TotalOcorrencias";
-import ReportOcorrencia from "./pages/Status/ReportOcorrencia";
+import ProtectedRoute from "./components/global/ProtectedRoute";
+import Status from "./components/status/Status";
+import TotalOcorrencias from "./components/status/TotalOcorrencias";
+import ReportOcorrencia from "./components/status/ReportOcorrencia";
 
 function App() {
   return (

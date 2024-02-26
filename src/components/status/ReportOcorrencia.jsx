@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import Button from "../../components/Button";
-import Error from "../../components/Error";
-import Select from "../../components/Select";
+import Button from "../global/Button";
+import Error from "../global/Error";
+import Select from "./Select";
 import { userContext } from "../../contexts/AuthContext";
 import { postOcorrencia } from "../../../functions";
 import { useParams } from "react-router-dom";

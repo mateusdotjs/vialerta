@@ -1,10 +1,10 @@
-import Input from "../components/Input";
-import Button from "../components/Button";
-import useField from "../hooks/useField";
+import Input from "../global/Input";
+import Button from "../global/Button";
+import useField from "../../hooks/useField";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { userContext } from "../contexts/AuthContext";
-import Error from "../components/Error";
+import { userContext } from "../../contexts/AuthContext";
+import Error from "../global/Error";
 import { Navigate } from "react-router-dom";
 
 const Register = () => {

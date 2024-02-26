@@ -1,11 +1,11 @@
-import Header from "../components/Header";
-import Button from "../components/Button";
-import Card from "../components/Card";
+import Header from "../global/Header";
+import Button from "../global/Button";
+import Card from "./Card";
 import { useContext, useEffect, useState } from "react";
-import { userContext } from "../contexts/AuthContext";
-import CardSkeleton from "../components/CardSkeleton";
-import { getRowOcorrencias } from "../../functions";
-import { linhas } from "../../themes";
+import { userContext } from "../../contexts/AuthContext";
+import CardSkeleton from "./CardSkeleton";
+import { getRowOcorrencias } from "../../../functions";
+import { linhas } from "../../../themes";
 
 const links = [
   {

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
-import Header from "../components/Header";
+import Button from "../global/Button";
+import Header from "../global/Header";
 
 const links = [
   {
@@ -13,7 +13,7 @@ const links = [
   },
 ];
 
-const Main = () => {
+const LandingPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <Header links={links}>
@@ -43,4 +43,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default LandingPage;

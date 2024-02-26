@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Select from "../../components/Select";
+import Select from "./Select";
 import { getTotalOcorrencias } from "../../../functions";
 import { useParams } from "react-router-dom";
 
