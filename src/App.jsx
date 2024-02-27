@@ -9,11 +9,13 @@ import ProtectedRoute from "./components/global/ProtectedRoute";
 import Status from "./components/status/Status";
 import TotalOcorrencias from "./components/status/TotalOcorrencias";
 import ReportOcorrencia from "./components/status/ReportOcorrencia";
+import Header from "./components/global/Header";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthContext>
+        <Header />
         <Routes>
           <Route index element={<Main />} />
           <Route path="/login" element={<LoginOutlet />}>

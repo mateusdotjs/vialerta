@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import Logo from "../../assets/vialerta.svg?react";
 import Menu from "../../assets/menu.svg?react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { userContext } from "../../contexts/AuthContext";
+import Button from "./Button";
 
-const Header = ({ children, links }) => {
+const Header = () => {
+  const { loggedIn, logout } = useContext(userContext);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,26 +23,30 @@ const Header = ({ children, links }) => {
         ${isOpen ? "absolute" : "hidden"}`}
         >
           <ul className="md:flex md:items-center md:gap-8">
-            {links &&
-              links.map((link) => {
-                return (
-                  <li
-                    key={link.title}
-                    className="cursor-pointer py-2 text-white md:text-gray-950"
-                  >
-                    <Link to={link.url}>{link.title}</Link>
-                  </li>
-                );
-              })}
-
-            {children &&
-              children.map((child, index) => {
-                return (
-                  <li key={index} className="py-2">
-                    {child}
-                  </li>
-                );
-              })}
+            {loggedIn ? (
+              <>
+                <li className="cursor-pointer py-2 text-white md:text-gray-950">
+                  <Link to={"/home"}>Home</Link>
+                </li>
+                <li className="cursor-pointer py-2 text-white md:text-gray-950">
+                  <Link to={"/conta"}>Conta</Link>
+                </li>
+                <li
+                  className="cursor-pointer py-2 text-white md:text-gray-950"
+                  onClick={logout}
+                >
+                  Sair
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="cursor-pointer py-2 text-white md:text-gray-950">
+                  <Link to={"/login"}>
+                    <Button>Entrar</Button>
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>

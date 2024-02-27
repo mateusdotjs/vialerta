@@ -1,28 +1,9 @@
 import { Link } from "react-router-dom";
 import Button from "../global/Button";
-import Header from "../global/Header";
-
-const links = [
-  {
-    title: "Sobre",
-    url: "/about",
-  },
-  {
-    title: "Contato",
-    url: "/contact",
-  },
-];
 
 const LandingPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
-      <Header links={links}>
-        {[
-          <Link key={1} to={"/login"}>
-            <Button>Entrar</Button>
-          </Link>,
-        ]}
-      </Header>
       <section className="flex flex-1 flex-col items-center justify-center gap-7 px-3">
         <h1 className="text-center text-3xl font-semibold md:max-w-xl md:text-5xl">
           Atualizações em tempo real sobre as linhas de metrô 🚈
