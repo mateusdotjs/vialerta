@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { supabase } from "../../supabase";
 import { useLocation, useNavigate } from "react-router-dom";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const userContext = createContext();
 
 export const AuthContext = ({ children }) => {

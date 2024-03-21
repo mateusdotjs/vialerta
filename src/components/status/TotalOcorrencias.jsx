@@ -18,6 +18,29 @@ const options = [
   },
 ];
 
+const dateIntervals = [
+  {
+    name: "lastMonth",
+    stateName: "mes",
+    header: "No último mês:",
+  },
+  {
+    name: "lastWeek",
+    stateName: "semana",
+    header: "Na última semana:",
+  },
+  {
+    name: "lastDay",
+    stateName: "dia",
+    header: "No último dia:",
+  },
+  {
+    name: "lastHour",
+    stateName: "hora",
+    header: "Na última hora:",
+  },
+];
+
 const TotalOcorrencias = () => {
   const [ocorrencias, setOcorrencias] = useState(null);
   const [type, setType] = useState(null);
@@ -25,30 +48,17 @@ const TotalOcorrencias = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    const intervals = [
-      {
-        interval: "lastMonth",
+    const intervals = dateIntervals.map((dateInterval) => {
+      return {
+        interval: dateInterval.name,
         callback: (count) => {
-          setOcorrencias((ocorrencias) => ({ ...ocorrencias, mes: count }));
+          setOcorrencias((ocorrencias) => ({
+            ...ocorrencias,
+            [dateInterval.stateName]: count,
+          }));
         },
-      },
-      {
-        interval: "lastHour",
-        callback: (count) =>
-          setOcorrencias((ocorrencias) => ({
-            ...ocorrencias,
-            hora: count,
-          })),
-      },
-      {
-        interval: "halfHour",
-        callback: (count) =>
-          setOcorrencias((ocorrencias) => ({
-            ...ocorrencias,
-            meiaHora: count,
-          })),
-      },
-    ];
+      };
+    });
 
     async function getCount(interval, callback) {
       const { count, error } = await getTotalOcorrencias(id, type, interval);
@@ -61,7 +71,7 @@ const TotalOcorrencias = () => {
 
     setLoading(true);
     Promise.allSettled(
-      intervals.map((func) => getCount(func.interval, func.callback)),
+      intervals.map((func) => getCount(func.interval, func.callback))
     ).finally(() => setLoading(false));
   }, [id, type]);
 
@@ -76,26 +86,18 @@ const TotalOcorrencias = () => {
       ) : (
         <table>
           <tbody>
-            <tr>
-              <th className="text-left">Nos últimos 30 minutos</th>
-              <td className="pl-2">
-                {ocorrencias.meiaHora
-                  ? ocorrencias.meiaHora
-                  : "Dado indisponível"}
-              </td>
-            </tr>
-            <tr>
-              <th className="text-left">Na última hora</th>
-              <td className="pl-2">
-                {ocorrencias.hora ? ocorrencias.hora : "Dado indisponível"}
-              </td>
-            </tr>
-            <tr>
-              <th className="text-left">Neste mês</th>
-              <td className="pl-2">
-                {ocorrencias.mes ? ocorrencias.mes : "Dado indisponível"}
-              </td>
-            </tr>
+            {dateIntervals.map((interval) => {
+              return (
+                <tr key={interval.header}>
+                  <th className="text-left">{interval.header}</th>
+                  <td className="pl-2">
+                    {ocorrencias[interval.stateName]
+                      ? ocorrencias[interval.stateName]
+                      : "Dado indisponível"}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}

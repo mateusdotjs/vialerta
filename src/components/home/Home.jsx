@@ -4,7 +4,6 @@ import CardSkeleton from "./CardSkeleton";
 import { getRowOcorrencias } from "../../../functions";
 import { linhas } from "../../../themes";
 
-
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState(null);
@@ -52,25 +51,23 @@ const Home = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <div
-        className="flex flex-1 flex-wrap justify-center gap-7 py-6 pl-5 pr-3 md:mx-auto 
+    <div
+      className="flex flex-1 flex-wrap justify-center gap-7 py-6 pl-5 pr-3 md:mx-auto 
       lg:content-start lg:justify-start lg:px-5 xl:max-w-7xl"
-      >
-        {loading && skeletons.map((skeleton) => skeleton)}
-        {!loading &&
-          linhas.map((linha) => {
-            return (
-              <Card
-                key={linha.id}
-                id={linha.id}
-                title={linha.titulo}
-                status={status}
-                ocorrencias={ocorrencias}
-              />
-            );
-          })}
-      </div>
+    >
+      {loading && skeletons.map((skeleton) => skeleton)}
+      {!loading &&
+        linhas.map((linha) => {
+          return (
+            <Card
+              key={linha.id}
+              id={linha.id}
+              title={linha.titulo}
+              status={status}
+              ocorrencias={ocorrencias}
+            />
+          );
+        })}
     </div>
   );
 };

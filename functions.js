@@ -13,26 +13,8 @@ defaultDate.setMinutes(defaultDate.getMinutes() - 30);
 
 export async function getTotalOcorrencias(id, type, time) {
   if (type === "Todas") type = null;
-  let date = new Date();
 
-  switch (time) {
-    case "lastHalfHour":
-      date = null;
-      break;
-
-    case "lastHour":
-      date.setMinutes(date.getMinutes() - 60);
-      break;
-
-    case "lastMonth":
-      date.setHours(0, 0, 0, 0);
-      date.setDate(1);
-      break;
-
-    default:
-      date = null;
-      break;
-  }
+  const date = setTime(time);
 
   let query = supabase
     .from("ocorrencias")
@@ -50,6 +32,22 @@ export async function getTotalOcorrencias(id, type, time) {
 
 export async function getRowOcorrencias(id, type, time) {
   if (type === "Todas") type = null;
+
+  const date = setTime(time);
+
+  let query = supabase.from("ocorrencias").select("*");
+
+  query = id ? query.eq("linha", id) : query;
+  query = type ? query.eq("type", type) : query;
+  query = date
+    ? query.gt("created_at", date.toISOString())
+    : query.gt("created_at", defaultDate.toISOString());
+
+  const { data, error } = await query;
+  return { data, error };
+}
+
+export function setTime(time) {
   let date = new Date();
 
   switch (time) {
@@ -59,6 +57,14 @@ export async function getRowOcorrencias(id, type, time) {
 
     case "lastHour":
       date.setMinutes(date.getMinutes() - 60);
+      break;
+
+    case "lastDay":
+      date.setDate(date.getDate() - 1);
+      break;
+
+    case "lastWeek":
+      date.setDate(date.getDate() - 7);
       break;
 
     case "lastMonth":
@@ -71,16 +77,5 @@ export async function getRowOcorrencias(id, type, time) {
       break;
   }
 
-  let query = supabase
-    .from("ocorrencias")
-    .select("*");
-
-  query = id ? query.eq("linha", id) : query;
-  query = type ? query.eq("type", type) : query;
-  query = date
-    ? query.gt("created_at", date.toISOString())
-    : query.gt("created_at", defaultDate.toISOString());
-
-  const { data, error } = await query;
-  return { data, error };
+  return date;
 }

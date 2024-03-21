@@ -3,7 +3,7 @@ import Button from "../global/Button";
 
 const LandingPage = () => {
   return (
-    <div className="flex min-h-screen flex-col">
+    <>
       <section className="flex flex-1 flex-col items-center justify-center gap-7 px-3">
         <h1 className="text-center text-3xl font-semibold md:max-w-xl md:text-5xl">
           Atualizações em tempo real sobre as linhas de metrô 🚈
@@ -17,10 +17,7 @@ const LandingPage = () => {
           <Button>Crie sua conta agora</Button>
         </Link>
       </section>
-      <footer className="bg-amber-400 py-10 text-center text-amber-950">
-        Alguns direitos reservados.
-      </footer>
-    </div>
+    </>
   );
 };
 
