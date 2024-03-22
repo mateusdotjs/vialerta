@@ -8,6 +8,7 @@ export default {
     extend: {
       backgroundImage: {
         metro: "url('/src/assets/metro-bg.jpg')",
+        blur: "url('/src/assets/bbblurry.svg')"
       },
       keyframes: {
         slide: {

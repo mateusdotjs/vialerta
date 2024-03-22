@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <header className="border border-gray-100 shadow-sm shadow-gray-100">
       <div className="relative mx-auto flex w-full items-center justify-between px-3 py-6 xl:max-w-7xl">
-        <Link to={"/home"}>
+        <Link to={"/"}>
           <Logo />
         </Link>
         <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -26,10 +26,7 @@ const Header = () => {
             {loggedIn ? (
               <>
                 <li className="cursor-pointer py-2 text-white md:text-gray-950">
-                  <Link to={"/home"}>Home</Link>
-                </li>
-                <li className="cursor-pointer py-2 text-white md:text-gray-950">
-                  <Link to={"/conta"}>Conta</Link>
+                  <Link to={"/"}>Status</Link>
                 </li>
                 <li
                   className="cursor-pointer py-2 text-white md:text-gray-950"

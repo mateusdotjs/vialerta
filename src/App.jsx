@@ -19,19 +19,19 @@ function App() {
         <Header />
         <main className="min-h-screen flex">
           <Routes>
-            <Route index element={<Main />} />
-            <Route path="/login" element={<LoginOutlet />}>
-              <Route index element={<Login />} />
-              <Route path="register" element={<Register />} />
-            </Route>
             <Route
-              path="/home"
+              index
               element={
                 <ProtectedRoute>
                   <Home />
                 </ProtectedRoute>
               }
             />
+            <Route path="/login" element={<LoginOutlet />}>
+              <Route index element={<Login />} />
+              <Route path="register" element={<Register />} />
+            </Route>
+            <Route path="/home" element={<Main />} />
             <Route
               path="/status/:id"
               element={
