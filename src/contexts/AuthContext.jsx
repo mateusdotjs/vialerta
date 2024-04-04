@@ -28,7 +28,7 @@ export const AuthContext = ({ children }) => {
     setUser({ id: data.user.id, name: data.user.user_metadata.name });
     setLoggedIn(true);
     setLoading(false);
-    return navigate("/home");
+    return navigate("/");
   }
 
   async function logout() {
@@ -65,7 +65,7 @@ export const AuthContext = ({ children }) => {
     setUser({ id: data.user.id, name: data.user.user_metadata.name });
     setLoggedIn(true);
     setLoading(false);
-    return navigate("/home");
+    return navigate("/");
   }
 
   useEffect(() => {
