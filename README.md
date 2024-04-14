@@ -1,3 +1,3 @@
 # Vialerta
 
-Aplicativo (em construção) criado para informar usuários do metrô de São Paulo sobre o status das linhas de transporte público. Disponível em [https://vialerta.netlify.app/](https://vialerta.netlify.app/).
+Versão do Vialerta em supabase. Disponível em [https://vialerta-supabase.netlify.app/](https://vialerta-supabase.netlify.app/).
